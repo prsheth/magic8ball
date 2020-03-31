@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(
       MaterialApp(
         home: Scaffold(
           backgroundColor: Colors.blue[300],
           appBar: AppBar(
-            title: Text('Magic8Ball'),
+            title: Text('Ask Me Anything'),
             backgroundColor: Colors.indigo[600],
           ),
           body: Magic8Ball(),
@@ -19,19 +20,24 @@ class Magic8Ball extends StatefulWidget {
 }
 
 class _Magic8BallState extends State<Magic8Ball> {
+  int clickCounter = 1;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Text(
-          'Ask Me Anything',
-          style: TextStyle(
-            fontSize: 40.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-      ],
+    return Center(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: FlatButton(
+              onPressed: () {
+                setState(() {
+                  clickCounter = Random().nextInt(5) + 1;
+                });
+              },
+              child: Image.asset('images/ball$clickCounter.png'),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
